@@ -62,7 +62,6 @@ mkdir -p .config/kitty 2>/dev/null
 ln -sf $CONFIG_DIR/kitty/kitty.conf ~/.config/kitty/kitty.conf
 ln -sf $CONFIG_DIR/kitty/kitty-themes/themes/OneDark.conf ~/.config/kitty/theme.conf
 
-
 ## One Password cli
 wget https://cache.agilebits.com/dist/1P/op/pkg/$ONE_PASSWORD_VERSION/op_linux_amd64_$ONE_PASSWORD_VERSION.zip ~/.temp
 unzip op_linux_amd64_$ONE_PASWORD_VERSION.zip ~/.temp
@@ -76,5 +75,9 @@ wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add
 sudo apt-get update -y
 install google-chrome-stable -y
 
+## Snaps
+sudo snap install slack --classic
+
 # remove the tmp
 rm -rf $TMP_DIR
+
