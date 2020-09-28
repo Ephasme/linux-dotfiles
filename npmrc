@@ -1,0 +1,7 @@
+registry=https://nexus.internal.foxapi.xyz/repository/npm-fox/
+email=loupfoxintelligence.fr
+always-auth=true
+_auth=BWqK9M7K3k3tuM3C
+//nexus.internal.foxapi.xyz/repository/npm-private/:_authToken=NpmToken.0f83dd7c-5273-3e64-af49-d49f3e523fa8
+//nexus.internal.foxapi.xyz/repository/npm-fox/:_authToken=NpmToken.0f83dd7c-5273-3e64-af49-d49f3e523fa8
+save-exact=true

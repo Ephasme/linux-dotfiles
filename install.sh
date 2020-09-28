@@ -19,12 +19,22 @@ sudo apt-get update -y && \
 
 install xclip xsel # to copy to system clipboard in tmux
 
+## One Password cli
+# wget -O $TMP_DIR https://cache.agilebits.com/dist/1P/op/pkg/$ONE_PASSWORD_VERSION/op_linux_amd64_$ONE_PASSWORD_VERSION.zip
+# unzip $TMP_DIR/op_linux_amd64_$ONE_PASWORD_VERSION.zip $TMP_DIR
+
+# Install vpn
+install openvpn \
+    network-manager-openvpn \
+    network-manager-openvpn-gnome
+
 # Install fonts
 cat $DOTFILES_DIR/install-fonts.sh | /bin/bash 
 
 ## install fnm
 curl -fsSL "https://github.com/Schniz/fnm/raw/master/.ci/install.sh --skip-shell" | bash
 $HOME/.fnm/fnm install latest
+ln -sf $DOTFILES_DIR/npmrc $HOME/.npmrc
 
 ## Yarn
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
@@ -34,6 +44,14 @@ sudo apt update && sudo apt install yarn
 ## Git
 install git
 git submodule update --init --recursive --remote
+
+make_key() {
+    echo "generating keys..."
+    [ ! -f "$HOME/.ssh/$2" ] && ssh-keygen -q -t rsa -b 4096 -C "$1" -f "$HOME/.ssh/$2" -N ""
+}
+make_key "loup@foxintelligence.fr" "work_id_rsa"
+make_key "loup.peluso@gmail.com"   "me_id_rsa"
+ln -sf "$DOTFILES_DIR/ssh-config" "$HOME/.ssh/config"
 
 ## ZSH
 install zsh
@@ -62,9 +80,12 @@ mkdir -p .config/kitty 2>/dev/null
 ln -sf $CONFIG_DIR/kitty/kitty.conf ~/.config/kitty/kitty.conf
 ln -sf $CONFIG_DIR/kitty/kitty-themes/themes/OneDark.conf ~/.config/kitty/theme.conf
 
-## One Password cli
-wget https://cache.agilebits.com/dist/1P/op/pkg/$ONE_PASSWORD_VERSION/op_linux_amd64_$ONE_PASSWORD_VERSION.zip ~/.temp
-unzip op_linux_amd64_$ONE_PASWORD_VERSION.zip ~/.temp
+## Github cli
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0
+sudo apt-add-repository https://cli.github.com/packages
+sudo apt update
+install gh
+
 
 ## Awesome WM
 install awesome

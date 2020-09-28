@@ -1,0 +1,15 @@
+# Personal GitHub account
+Host me.github.com
+ HostName github.com
+ User git
+ IdentityFile ~/.ssh/me_id_rsa
+# Work GitHub account
+Host work.github.com
+ HostName github.com
+ User git
+ IdentityFile ~/.ssh/work_id_rsa
+# Work GitHub account
+Host sandbox
+ HostName git-codecommit.eu-central-1.amazonaws.com
+ User APKA4NZNLILGQO5YH6OO
+ IdentityFile ~/.ssh/work_id_rsa
