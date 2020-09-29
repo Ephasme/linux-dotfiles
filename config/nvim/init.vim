@@ -9,6 +9,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'joshdick/onedark.vim'
 Plug 'junegunn/vim-easy-align'
+Plug 'chrisbra/colorizer' " Visualise colors
 
 " Coc install
 Plug 'neoclide/coc.nvim', {'branch': 'release'}

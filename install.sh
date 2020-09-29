@@ -17,22 +17,29 @@ sudo apt-get update -y && \
    sudo apt-get upgrade -y && \
    sudo add-apt-repository universe
 
-install xclip xsel # to copy to system clipboard in tmux
+# Python
+install software-properties-common
+install python3
+# to copy to system clipboard in tmux
+install xclip
+install xsel
+# VPN tools
+install openvpn
+install network-manager-openvpn
+install network-manager-openvpn-gnome
 
 ## One Password cli
 # wget -O $TMP_DIR https://cache.agilebits.com/dist/1P/op/pkg/$ONE_PASSWORD_VERSION/op_linux_amd64_$ONE_PASSWORD_VERSION.zip
 # unzip $TMP_DIR/op_linux_amd64_$ONE_PASWORD_VERSION.zip $TMP_DIR
 
-# Install vpn
-install openvpn \
-    network-manager-openvpn \
-    network-manager-openvpn-gnome
-
 # Install fonts
 cat $DOTFILES_DIR/install-fonts.sh | /bin/bash 
+## For emojis
+sudo apt-get install fonts-noto-color-emoji
+ln -nsf $DOTFILES_DIR/config/fontconfig ~/.config/fontconfig
 
 ## install fnm
-curl -fsSL "https://github.com/Schniz/fnm/raw/master/.ci/install.sh --skip-shell" | bash
+curl -fsSL https://github.com/Schniz/fnm/raw/master/.ci/install.sh | bash
 $HOME/.fnm/fnm install latest
 ln -sf $DOTFILES_DIR/npmrc $HOME/.npmrc
 
@@ -75,10 +82,15 @@ mkdir -f ~/.config/coc 2>/dev/null
 ln -sf $CONFIG_DIR/coc/coc-settings.json ~/.config/coc/coc-settings.json
 
 ## Kitty terminal
+KITTY_DIR=~/.config/kitty
 install kitty
-mkdir -p .config/kitty 2>/dev/null
-ln -sf $CONFIG_DIR/kitty/kitty.conf ~/.config/kitty/kitty.conf
-ln -sf $CONFIG_DIR/kitty/kitty-themes/themes/OneDark.conf ~/.config/kitty/theme.conf
+mkdir -p $KITTY_DIR 2>/dev/null
+ln -sf $CONFIG_DIR/kitty/kitty.conf $KITTY_DIR/kitty.conf
+ln -sf $CONFIG_DIR/kitty/kitty-themes/themes/OneDark.conf $KITTY_DIR/theme.conf
+
+## IVY2 creds
+mkdir -p -f ~/.ivy2
+ln -sf $DOTFILES_DIR/ivy-credentials ~/.ivy2/.credentials
 
 ## Github cli
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0
@@ -86,9 +98,11 @@ sudo apt-add-repository https://cli.github.com/packages
 sudo apt update
 install gh
 
-
 ## Awesome WM
 install awesome
+ln -nsf $DOTFILES_DIR/config/awesome ~/.config/awesome
+   # screen savers
+install nitrogen
 
 ## installation of google chrome
 sh -c 'echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list'
@@ -96,9 +110,37 @@ wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add
 sudo apt-get update -y
 install google-chrome-stable -y
 
+# Install aws
+$AWS_CLI=$TMP_DIR/awscli-bundle.zip
+if [ ! -f "$AWS_CLI" ]; then
+   curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "$AWS_CLI"
+   unzip awscli-bundle.zip -O $TMP_DIR
+   sudo $TMP_DIR/awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
+fi
+
+# SdkMan
+curl -s "https://get.sdkman.io" | bash
+source "/home/loup/.sdkman/bin/sdkman-init.sh"
+sdk i sbt
+sdk i java
+sdk i scala
+
+## Docker
+# prepare installation
+install apt-transport-https ca-certificates curl software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+sudo apt update -y
+# install tools
+install docker-ce
+install docker-compose
+# can use docker without sudo
+sudo usermod -aG docker $USER
+su - $USER
+
 ## Snaps
 sudo snap install slack --classic
-
-# remove the tmp
-rm -rf $TMP_DIR
+sudo snap install code --classic
+sudo snap install intellij-idea-community --classic --edge
+sudo snap install spotify --classic
 

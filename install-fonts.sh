@@ -10,3 +10,4 @@ mkdir -p ~/.fonts
 curl -fLo "$NAME" $URL
 mv -f "$NAME" ~/.fonts
 fc-cache -f
+

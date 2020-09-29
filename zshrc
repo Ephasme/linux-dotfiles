@@ -110,3 +110,47 @@ export LANG=en_US.UTF-8
 # fnm
 export PATH=/home/loup/.fnm:$PATH
 eval "`fnm env --multi`"
+
+# fnm
+export PATH=/home/loup/.fnm:$PATH
+eval "`fnm env --multi`"
+
+# fnm
+export PATH=/home/loup/.fnm:$PATH
+eval "`fnm env --multi`"
+
+# fnm
+export PATH=/home/loup/.fnm:$PATH
+eval "`fnm env --multi`"
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/home/loup/.sdkman"
+[[ -s "/home/loup/.sdkman/bin/sdkman-init.sh" ]] && source "/home/loup/.sdkman/bin/sdkman-init.sh"
+
+# fnm
+export PATH=/home/loup/.fnm:$PATH
+eval "`fnm env --multi`"
+
+# fnm
+export PATH=/home/loup/.fnm:$PATH
+eval "`fnm env --multi`"
+
+# fnm
+export PATH=/home/loup/.fnm:$PATH
+eval "`fnm env --multi`"
+
+# fnm
+export PATH=/home/loup/.fnm:$PATH
+eval "`fnm env --multi`"
+
+# fnm
+export PATH=/home/loup/.fnm:$PATH
+eval "`fnm env --multi`"
+
+# fnm
+export PATH=/home/loup/.fnm:$PATH
+eval "`fnm env --multi`"
+
+# fnm
+export PATH=/home/loup/.fnm:$PATH
+eval "`fnm env --multi`"
